@@ -1,6 +1,11 @@
 #include <Arduino.h>
 #include "Adafruit_FONA.h"
 #include <SoftwareSerial.h>
+#include "../include/secrets.h"
+
+
+// Send sms interval (1 hour here)
+#define INTERVAL 3600000
 
 #define FONA_RX 2
 #define FONA_TX 3
@@ -11,14 +16,6 @@ SoftwareSerial fonaSS = SoftwareSerial(FONA_TX, FONA_RX);
 SoftwareSerial *fonaSerial = &fonaSS;
 Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
 
-char pin[5] = {1, 2, 3, 4};
-
-
-String contact_numbers[] = {"0033650065421", "0033612686923"};
-
-// Send sms interval (1 hour here)
-long interval = 3600000;
-
 void setup() {
     while (!Serial);
 
@@ -26,11 +23,13 @@ void setup() {
     Serial.println(F("Initializing FONA... (May take a few seconds)"));
 
     fonaSerial->begin(4800);
+
     if (!fona.begin(*fonaSerial)) {
         Serial.println(F("Couldn't find FONA"));
         while (true);
     }
     Serial.println(F("FONA is OK"));
+
     Serial.println(F("Enabling GPS..."));
     fona.enableGPS(true);
 
@@ -38,7 +37,7 @@ void setup() {
     fona.enableGPRS(false);
 
     Serial.print(F("Unlocking SIM card: "));
-    Serial.println(fona.unlockSIM(pin) ? F("OK") : F("FAIL"));
+    Serial.println(fona.unlockSIM(PIN_CODE) ? F("OK") : F("FAIL"));
 
     // Waiting for network fix
     uint8_t n = fona.getNetworkStatus();
@@ -109,6 +108,6 @@ void loop() {
             }
         }
 
-        delay(interval);
+        delay( INTERVAL);
     }
 }
