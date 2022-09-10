@@ -37,7 +37,7 @@ void setup() {
     fona.enableGPRS(false);
 
     Serial.print(F("Unlocking SIM card: "));
-    Serial.println(fona.unlockSIM(PIN_CODE) ? F("OK") : F("FAIL"));
+    Serial.println(fona.unlockSIM(const_cast<char *>(pin_code.c_str())) ? F("OK") : F("FAIL"));
 
     // Waiting for network fix
     uint8_t n = fona.getNetworkStatus();
