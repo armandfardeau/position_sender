@@ -30,14 +30,14 @@ void setup() {
     }
     Serial.println(F("FONA is OK"));
 
+    Serial.print(F("Unlocking SIM card: "));
+    Serial.println(fona.unlockSIM(const_cast<char *>(pin_code.c_str())) ? F("OK") : F("FAIL"));
+
     Serial.println(F("Enabling GPS..."));
     fona.enableGPS(true);
 
     Serial.println(F("disabling GPRS..."));
     fona.enableGPRS(false);
-
-    Serial.print(F("Unlocking SIM card: "));
-    Serial.println(fona.unlockSIM(const_cast<char *>(pin_code.c_str())) ? F("OK") : F("FAIL"));
 
     // Waiting for network fix
     uint8_t n = fona.getNetworkStatus();
