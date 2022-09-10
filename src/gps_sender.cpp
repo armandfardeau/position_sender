@@ -64,6 +64,14 @@ void setup() {
         Serial.print("Contact number " + String(i) + ": ");
         Serial.println(contact_numbers[i]);
     }
+
+    // Start 10 sec cooldown before sending first sms
+    Serial.println(F("Starting 10 sec cooldown before sending first sms..."));
+    for (int i = 10; i > 0; i--) {
+        Serial.print(i);
+        Serial.println(F(" sec remaing..."));
+        delay(1000);
+    }
 }
 
 void loop() {
@@ -108,6 +116,6 @@ void loop() {
             }
         }
 
-        delay( INTERVAL);
+        delay(INTERVAL);
     }
 }
