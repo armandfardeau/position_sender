@@ -48,6 +48,8 @@ void setup() {
         Serial.print(F("Network status: Not registered. Trying again..."));
     }
     Serial.println(F("Network status: Registered"));
+    Serial.print(F("Code: "));
+    Serial.println(n);
 
     // Waiting for GPS fix
     uint8_t fix = fona.GPSstatus();
@@ -57,6 +59,8 @@ void setup() {
         Serial.print(F("GPS status: No fix. Trying again..."));
     }
     Serial.println(F("GPS status: Fix"));
+    Serial.print(F("Code: "));
+    Serial.println(fix);
 
     // Displays contact info
     Serial.println(F("Contacts info:"));
