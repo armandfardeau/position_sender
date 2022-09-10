@@ -99,7 +99,7 @@ void loop() {
         Serial.print(vbat);
         Serial.println(F("%"));
 
-        String message = "https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon;
+        String message = "GPS Boat tracker update\nClick on the following link:\nhttps://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon;
 
         //iterating through the contact_numbers array
         for (int i = 0; i < sizeof(contact_numbers) / sizeof(contact_numbers[0]); i++) {
